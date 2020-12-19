@@ -3,7 +3,7 @@ from api_v1 import api
 
 
 app=Flask(__name__)
-# app.config.from_object(config)
+app.config.from_object(config)
 
 app.register_blueprint(api, url_prefix="/api")
 
