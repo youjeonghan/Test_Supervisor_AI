@@ -1,7 +1,10 @@
 '''
 student controller
 '''
+import os
 from flask import jsonify
+from flask import current_app
+from flask import request
 from models import Students
 from models import db
 
@@ -28,7 +31,7 @@ def student_list_info():
 def student_evaluat_con():
     student = Students.query.filter(Students.student_number == st_number).first()
     result = False
-    if student.state == pass
+    if student.state == "pass":
         result = True
 
     return jsonify({
@@ -37,8 +40,14 @@ def student_evaluat_con():
     })
 
 
-def submit_exam_data_con():
-    id = request.form.get("id")
-    pw = request.form.get("pw")
-    uploaded_files = request.files.get("file")
-    uploaded_files = request.files.get("file")
+def submit_exam_data_con(id):
+    pcapng = request.files["pcapng"]
+    mp4 = request.files["mp4"]
+
+    pcapng.save(os.path.join(current_app.config["UPLOAD_PACKET_FOLDER"], f"{id}.pcapng"))
+    mp4.save(os.path.join(current_app.config["UPLOAD_VIDEO_FOLDER"], f"{id}.mp4"))
+    
+    return jsonify({
+        "state": 'success',
+        "result": True
+    })

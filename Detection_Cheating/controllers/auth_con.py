@@ -100,10 +100,10 @@ def auth_sejong(id, pw):
     elif uis_api(id,pw)['result'] == True:
         result = True
 
-    return jsonify({
+    return {
         "state": 'success',
         "result": result
-    })
+    }
 
 def auth_maneger(id, pw):
     '''관리자 인증
