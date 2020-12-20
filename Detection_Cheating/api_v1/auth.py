@@ -2,7 +2,7 @@ from api_v1 import api
 from flask import request
 from controllers.auth_con import auth_sejong, auth_maneger
 
-@api.route("/sejong", methods=["GET"])
+@api.route("/sejong", methods=["POST"])
 def student_auth():
     data = request.get_json()
     id = data.get("id")
@@ -10,7 +10,7 @@ def student_auth():
 
     return auth_sejong(id, pw)
 
-@api.route("/manager", methods=["GET"])
+@api.route("/manager", methods=["POST"])
 def manager_auth():
     data = request.get_json()
     id = data.get("id")
