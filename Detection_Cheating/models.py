@@ -9,9 +9,10 @@ class Students(db.Model):
     student_number = db.Column(db.Integer)
     name = db.Column(db.String(10))
     video_path = db.Column(db.String(30))
+    packet_path = db.Column(db.String(30))
     audio_path = db.Column(db.String(30))
     audio_img_path = db.Column(db.String(10))
-    state = db.Column(db.String(10))
+    state = db.Column(db.String(10), default="notyet")
     reason = db.Column(db.Text())
     network_result = db.Column(db.String(200))
     audio_result = db.Column(db.String(500))
@@ -24,6 +25,7 @@ class Students(db.Model):
             "student_number": self.student_number,
             "name": self.name,
             "video_path": self.video_path,
+            "packet_path": self.packet_path,
             "audio_path": self.audio_path,
             "audio_img_path": self.audio_img_path,
             "state": self.state,
