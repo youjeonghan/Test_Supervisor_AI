@@ -17,3 +17,19 @@ class Students(db.Model):
     audio_result = db.Column(db.String(500))
     # eye_result = db.Column(db.String(100))
     
+    @property
+    def serialize(self):
+        return {
+            "id": self.id,
+            "student_number": self.student_number,
+            "name": self.name,
+            "video_path": self.video_path,
+            "audio_path": self.audio_path,
+            "audio_img_path": self.audio_img_path,
+            "state": self.state,
+            "reason": self.reason,
+            "network_result": self.network_result,
+            "audio_result": self.audio_result,
+        }
+
+        
