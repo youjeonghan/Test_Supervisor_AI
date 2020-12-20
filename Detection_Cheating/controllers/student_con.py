@@ -23,3 +23,14 @@ def student_list_info():
         returnlist[i].update(state="success")
 
     return jsonify(returnlist)
+
+def student_evaluat_con():
+    student = Students.query.filter(Students.student_number == st_number).first()
+    result = False
+    if student.state == pass
+        result = True
+        
+    return jsonify({
+        "state": 'success',
+        "result": result
+    })
