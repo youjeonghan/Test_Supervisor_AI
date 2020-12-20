@@ -1,3 +1,8 @@
+### Custom ###
+migrations/*
+*.db
+#############
+
 # Created by https://www.toptal.com/developers/gitignore/api/python,sublimetext,vscode,windows,macos,intellij
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,sublimetext,vscode,windows,macos,intellij
 
