@@ -2,6 +2,7 @@
 auth controller
 '''
 import requests
+from flask import jsonify
 from bs4 import BeautifulSoup as bs
 import getpass
 
@@ -89,16 +90,20 @@ def auth_sejong(id, pw):
     print(dosejong_api(id,pw))
     print(sjlms_api(id,pw))
     print(uis_api(id, pw))
+    result = False
     if dosejong_api(id,pw)['result'] == True:
-        return "True"
+        result = True
 
-    else if sjlms_api(id,pw)['result'] == True:
-        return "True"
+    elif sjlms_api(id,pw)['result'] == True:
+        result = True
 
-    else if uis_api(id,pw)['result'] == True:
-        return "True"
+    elif uis_api(id,pw)['result'] == True:
+        result = True
 
-    return "False"
+    return jsonify({
+        "state": 'success',
+        "result": result
+    })
 
 def auth_maneger(id, pw):
     '''관리자 인증
@@ -109,7 +114,11 @@ def auth_maneger(id, pw):
     Returns:
         True or False
     '''
-    if id =="Manager" && pw =="1234":
-        return "True"
+    result = False
+    if id =="Manager" and pw =="1234":
+        result = True
 
-    return "False"
+    return jsonify({
+        "state": 'success',
+        "result": result
+    })
