@@ -32,19 +32,18 @@ def student_list_info():
 def student_evaluat_con():
     data = request.get_json()
     student_number = data.get("student_number")
-    pass = data.get("pass")
+    pass_ = data.get("pass")
     reason = data.get("reason")
 
     student = Students.query.filter(Students.student_number == student_number).first()
-
+    student.state = pass_
+    student.reason = reason
     db.session.commit()
-
-    if pass == True:
 
     return jsonify({
         "state": 'success',
-        "result": pass
-    })
+        "result": pass_
+        })
 
 
 def submit_exam_data_con(student_number):
@@ -54,7 +53,7 @@ def submit_exam_data_con(student_number):
     pcapng.save(os.path.join(current_app.config["UPLOAD_PACKET_FOLDER"], f"{student_number}.pcapng"))
     mp4.save(os.path.join(current_app.config["UPLOAD_VIDEO_FOLDER"], f"{student_number}.mp4"))
 
-    Students.query.filter(Students.student_number == student_number).first().update({
+    Students.query.filter(Students.student_number == student_number).update({
         'packet_path': current_app.config["UPLOAD_PACKET_FOLDER"] + f"{student_number}.pcapng", 
         'video_path': current_app.config["UPLOAD_VIDEO_FOLDER"] + f"{student_number}.mp4"
         })
@@ -64,7 +63,7 @@ def submit_exam_data_con(student_number):
         "result": True
     })
 
-def student_create(student_number):
+def student_create(student_number, pw):
     student = Students()
     student.student_number = student_number
     student.name = auth_sejong(student_number, pw)['name']
