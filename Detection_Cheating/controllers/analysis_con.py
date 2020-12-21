@@ -4,17 +4,16 @@ analysis controller
 from flask import current_app
 from models import db, Students
 
-def network_analysis_con(student_id):
+def network_analysis_con(student):
     '''네트워크 분석
     Args:
-        id: 학번
+        student: Students객체
 
     Returns:
         return: 사용한 패킷 목록 리스트 (String)
     '''
 
-    pcapng = current_app.config["UPLOAD_PACKET_FOLDER"] + f"{student_id}.pcapng"
-    print(pcapng)
+    pcapng = current_app.config["UPLOAD_PACKET_FOLDER"] + f"{student.student_number}.pcapng"
 
     result = []
     with open(pcapng,"rb") as f:
@@ -39,6 +38,6 @@ def network_analysis_con(student_id):
         list = list + packet + "/"
     
     print(list)
-    student = Students.query.filter(Students.student_number == student_id).update({'network_result': list})
+    student = Students.query.filter(Students.student_number == student.student_number)
+    student = student.update({'network_result': list})
     db.session.commit()
-    return result

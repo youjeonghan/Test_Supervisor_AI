@@ -91,17 +91,23 @@ def auth_sejong(id, pw):
     print(sjlms_api(id,pw))
     print(uis_api(id, pw))
     result = False
+    name = str()
+
     if dosejong_api(id,pw)['result'] == True:
+        name = dosejong_api(id,pw)['name']
         result = True
 
     elif sjlms_api(id,pw)['result'] == True:
+        name = sjlms_api(id,pw)['name']
         result = True
 
     elif uis_api(id,pw)['result'] == True:
+        name = uis_api(id,pw)['name']
         result = True
 
     return {
         "state": 'success',
+        "name": name,
         "result": result
     }
 
