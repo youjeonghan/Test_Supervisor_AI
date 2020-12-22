@@ -255,3 +255,4 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/venv,python,sublimetext,vscode,macos,windows
+Detection_Cheating/detecton_cheating.cmd
