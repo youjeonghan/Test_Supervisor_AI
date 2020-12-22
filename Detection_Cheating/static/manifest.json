@@ -1,0 +1,15 @@
+{
+  "short_name": "긍정행위",
+  "name": "AI 비대면 시험 보조 감독관 - 긍정행위",
+  "icons": [
+    {
+      "src": "favicons/favicon_96x96.png",
+      "sizes": "96x96 48x48 24x24",
+      "type": "image/x-icon"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff"
+}

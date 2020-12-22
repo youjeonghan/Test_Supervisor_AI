@@ -8,6 +8,10 @@ from controllers.auth_con import auth_sejong
 from controllers.analysis_con import network_analysis_con
 from controllers.catch_voice_con import catchVoiceTimeZone
 from controllers.sound_save_con import sound_save
+from controllers.example import GazeYourEye
+from controllers.drawWaveform import saveWaveform
+from controllers.sound_Catch import catchVoiceTimeZone2, wav2flac, call_stt
+from time import sleep
 
 @api.route("/student/", methods=["GET"])
 @api.route("/student/<student_id>", methods=["GET"])
@@ -54,16 +58,30 @@ def submit_exam_data():
     network_analysis_con(student)
 
     ### 음성 저장 ###
-    sound_save(student_number)
+    sound_save(student_number, student)
 
     ### 음성 분석 ###
     ### audio_path / audio_messages ###
     catchVoiceTimeZone(current_app.config["UPLOAD_SOUND_FOLDER"], student_number+".wav", student)
 
     ### 음성 파형 이미지 분석 ###
-    
+    saveWaveform(current_app.config["UPLOAD_SOUND_FOLDER"], current_app.config["UPLOAD_WAVE_IMG_FOLDER"], student_number, student)
+
+    ### 영상 분석 ###
+    ### eye_ratio_center / eye_ratio_blink / eye_ratio_left / eye_ratio_right / eye_result ###
+    # GazeYourEye(current_app.config["UPLOAD_VIDEO_FOLDER"]+f"{student_number}.mp4", student)
 
     # 지원이 코드 삽입 (wav, 목소리 출력 리스트)
+    time_section = catchVoiceTimeZone2(current_app.config["UPLOAD_SOUND_FOLDER"], f"{student_number}.wav")
     
+    print(time_section['time_zone'])
 
-    return jsonify(), 200
+    wav2flac(current_app.config["UPLOAD_SOUND_FOLDER"]+f"{student_number}.wav", time_section['time_zone'])
+    txt_list = call_stt(current_app.config["UPLOAD_SOUND_FOLDER"]+f"{student_number}.wav", time_section['time_zone'])
+    print(txt_list)
+
+
+    return jsonify({
+        "state":'success',
+	    "result": True
+        })

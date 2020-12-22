@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.js": "/static/js/main.d67538e8.chunk.js",
+    "runtime-main.js": "/static/js/runtime-main.d135238f.js",
+    "static/js/2.4c3c78d6.chunk.js": "/static/js/2.4c3c78d6.chunk.js",
+    "index.html": "/index.html",
+    "precache-manifest.ed35550fab7cab35a7b10d5ff33fbe67.js": "/precache-manifest.ed35550fab7cab35a7b10d5ff33fbe67.js",
+    "service-worker.js": "/service-worker.js",
+    "static/js/2.4c3c78d6.chunk.js.LICENSE.txt": "/static/js/2.4c3c78d6.chunk.js.LICENSE.txt",
+    "static/media/Audio.86f1d19a.svg": "/static/media/Audio.86f1d19a.svg",
+    "static/media/Check.15c321ce.svg": "/static/media/Check.15c321ce.svg",
+    "static/media/Close.2f1c1379.svg": "/static/media/Close.2f1c1379.svg",
+    "static/media/EyeBlink.b3eaf894.svg": "/static/media/EyeBlink.b3eaf894.svg",
+    "static/media/EyeCenter.a2883248.svg": "/static/media/EyeCenter.a2883248.svg",
+    "static/media/EyeLeft.a08c2a14.svg": "/static/media/EyeLeft.a08c2a14.svg",
+    "static/media/EyeRight.d2ef85e7.svg": "/static/media/EyeRight.d2ef85e7.svg",
+    "static/media/Help.f687cfc4.svg": "/static/media/Help.f687cfc4.svg",
+    "static/media/Menu.24fdff52.svg": "/static/media/Menu.24fdff52.svg",
+    "static/media/Network.58c24d0c.svg": "/static/media/Network.58c24d0c.svg",
+    "static/media/Video.b2640905.svg": "/static/media/Video.b2640905.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.d135238f.js",
+    "static/js/2.4c3c78d6.chunk.js",
+    "static/js/main.d67538e8.chunk.js"
+  ]
+}

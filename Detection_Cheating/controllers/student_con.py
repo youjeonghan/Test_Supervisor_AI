@@ -12,9 +12,27 @@ from controllers.auth_con import auth_sejong
 def student_info(st_number):
     student = Students.query.filter(Students.student_number == st_number).first()
 
+    returndict = {}
+
+    temp = []
+    temp2 = []
+    temp3 = []
+
+    returndict = student.serialize
+
+    temp = student.network_result.split('/')
+    returndict['network_result'] = temp
+
+    temp = student.audio_result.split(',')
+    for t in temp:
+        temp2 = t.split('-')
+        temp3.append(temp2)
+
+    returndict['audio_result'] = temp3
+
     return jsonify({
         "state": 'success',
-        "result": student.serialize
+        "result": returndict
     })
 
 
@@ -23,10 +41,32 @@ def student_list_info():
     returnlist = []
     for i, student in enumerate(studentlist):
         returnlist.append(dict())
-        returnlist[i].update(result=student.serialize)
-        returnlist[i].update(state="success")
+        
+        
+        # returnlist[i].update(result=student.serialize)
+        returnlist[i] = student.serialize
+        
+        temp = []
+        temp2 = []
+        temp3 = []
 
-    return jsonify(returnlist)
+        temp = student.network_result.split('/')
+        # returnlist[i]['result']['network_result'] = temp
+        returnlist[i]['network_result'] = temp
+
+        temp = student.audio_result.split(',')
+        for t in temp:
+            temp2 = t.split('-')
+            temp3.append(temp2)
+
+        # returnlist[i]['result']['audio_result'] = temp3
+        returnlist[i]['audio_result'] = temp3
+
+
+    return jsonify({
+        "state": 'success',
+        "result": returnlist
+    })
 
 
 def student_evaluat_con():

@@ -10,6 +10,10 @@ FILE_NAME = 'micTest.wav'
 # 여유값 +- 1초
 def catchZone(second_list):
     output = []
+
+    if len(second_list) == 0:
+        return []
+
     s = second_list[0] - 1 if second_list[0] - 1 >= 0 else 0
     e = second_list[0] + 1
     for sec in second_list[1:]:
@@ -22,6 +26,8 @@ def catchZone(second_list):
             e = sec + 1
     
     output.append((s, e))
+
+    print("리턴 직전 호출 잘됨")
 
     print('time_zone(start, end):   ', output, '\n')
     return output
@@ -60,11 +66,21 @@ def catchVoiceTimeZone(file_path, file_name, student):
     a = catchVoice(file_path + file_name)
     b = catchZone(a['time_list'])
 
+    print("b:")
     print(b)
+
+    list = str()
+    for i, data in enumerate(b):
+        if len(b)-1 == i:
+            list = list + (f"{data[0]}-{data[1]}")    
+        else:
+            list = list + (f"{data[0]}-{data[1]},")
+    
+    print(list)
 
     student = Students.query.filter(Students.student_number == student.student_number)
     student = student.update({
-        'audio_playtime': a['all']
-        # 'audio_result': b 문자열로 합쳐서 넣어야함
+        'audio_playtime': a['all'],
+        'audio_result': list
         })
     db.session.commit()

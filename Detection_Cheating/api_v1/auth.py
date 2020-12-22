@@ -9,6 +9,9 @@ def student_auth():
     id = data.get("id")
     pw = data.get("pw")
 
+    print(id)
+    print(pw)
+
     return jsonify(auth_sejong(id, pw))
 
 @api.route("/manager", methods=["POST"])

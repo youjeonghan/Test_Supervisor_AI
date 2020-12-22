@@ -33,9 +33,12 @@ def network_analysis_con(student):
         if "676974687562" in string: #github
             result.append("Github")
 
-    list = str()    
-    for packet in result:
-        list = list + packet + "/"
+    list = str()
+    for i, packet in enumerate(result):
+        if len(result)-1 == i:
+            list = list + packet 
+        else:
+            list = list + packet + "/"
     
     print(list)
     student = Students.query.filter(Students.student_number == student.student_number)
