@@ -8,10 +8,15 @@ from controllers.auth_con import auth_sejong
 from controllers.analysis_con import network_analysis_con
 from controllers.catch_voice_con import catchVoiceTimeZone
 from controllers.sound_save_con import sound_save
-from controllers.example import GazeYourEye
+from example import GazeYourEye
 from controllers.drawWaveform import saveWaveform
 from controllers.sound_Catch import catchVoiceTimeZone2, wav2flac, call_stt
 from time import sleep
+from models import db, Students
+import time
+import timeit
+import threading
+
 
 @api.route("/student/", methods=["GET"])
 @api.route("/student/<student_id>", methods=["GET"])
@@ -37,6 +42,7 @@ def submit_exam_data():
         pcapng: pcapng 파일
         mp4: 영상 파일
     '''
+
     student_number = request.form["id"]
     pw = request.form["pw"]
     if auth_sejong(student_number, pw)['result'] == False:
@@ -60,6 +66,7 @@ def submit_exam_data():
     ### 음성 저장 ###
     sound_save(student_number, student)
 
+
     ### 음성 분석 ###
     ### audio_path / audio_messages ###
     catchVoiceTimeZone(current_app.config["UPLOAD_SOUND_FOLDER"], student_number+".wav", student)
@@ -69,19 +76,27 @@ def submit_exam_data():
 
     ### 영상 분석 ###
     ### eye_ratio_center / eye_ratio_blink / eye_ratio_left / eye_ratio_right / eye_result ###
-    # GazeYourEye(current_app.config["UPLOAD_VIDEO_FOLDER"]+f"{student_number}.mp4", student)
+    GazeYourEye(student.video_path, student)
+
 
     # 지원이 코드 삽입 (wav, 목소리 출력 리스트)
-    time_section = catchVoiceTimeZone2(current_app.config["UPLOAD_SOUND_FOLDER"], f"{student_number}.wav")
-    
-    print(time_section['time_zone'])
-
+    time_section = catchVoiceTimeZone2(current_app.config["UPLOAD_SOUND_FOLDER"], f"{student_number}.wav")    
     wav2flac(current_app.config["UPLOAD_SOUND_FOLDER"]+f"{student_number}.wav", time_section['time_zone'])
     txt_list = call_stt(current_app.config["UPLOAD_SOUND_FOLDER"]+f"{student_number}.wav", time_section['time_zone'])
-    print(txt_list)
-
+    
+    
+    list = str()
+    for i, txt in enumerate(txt_list):
+        if len(txt_list)-1 == i:
+            list = list + txt[0] 
+        else:
+            list = list + txt[0] + "/"
+    
+    student = Students.query.filter(Students.student_number == student.student_number)
+    student = student.update({'audio_messages': list})
+    db.session.commit()
 
     return jsonify({
         "state":'success',
-	    "result": True
+       "result": True
         })

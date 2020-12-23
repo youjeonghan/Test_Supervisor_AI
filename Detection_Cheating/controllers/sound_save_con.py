@@ -8,7 +8,8 @@ FILE_NAME = 'dynamite'
 VIDEO_EXTENSION = 'mp4'
 AUDIO_EXTENSION = 'wav'
 def sound_save(student_number, student):
-    videoclip = VideoFileClip(current_app.config["UPLOAD_VIDEO_FOLDER"] + student_number + '.' + VIDEO_EXTENSION)
+    # videoclip = VideoFileClip(current_app.config["UPLOAD_VIDEO_FOLDER"] + student_number + '.' + VIDEO_EXTENSION)
+    videoclip = VideoFileClip(student.video_path)
     audioclip = videoclip.audio
 
     temp = str()

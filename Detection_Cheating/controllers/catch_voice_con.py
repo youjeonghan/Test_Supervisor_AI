@@ -27,9 +27,6 @@ def catchZone(second_list):
     
     output.append((s, e))
 
-    print("리턴 직전 호출 잘됨")
-
-    print('time_zone(start, end):   ', output, '\n')
     return output
 
 def catchVoice(FILE):
@@ -54,8 +51,8 @@ def catchVoice(FILE):
             if math.floor(t) not in sec_list:
                 sec_list.append(math.floor(t))
 
-    print('time_list(sec):   ', sec_list)
-    print ('time:   ', round(times[-1], 2))
+    # print('time_list(sec):   ', sec_list)
+    # print ('time:   ', round(times[-1], 2))
 
     return {
         'time_list': sec_list,
@@ -66,8 +63,6 @@ def catchVoiceTimeZone(file_path, file_name, student):
     a = catchVoice(file_path + file_name)
     b = catchZone(a['time_list'])
 
-    print("b:")
-    print(b)
 
     list = str()
     for i, data in enumerate(b):
@@ -76,7 +71,6 @@ def catchVoiceTimeZone(file_path, file_name, student):
         else:
             list = list + (f"{data[0]}-{data[1]},")
     
-    print(list)
 
     student = Students.query.filter(Students.student_number == student.student_number)
     student = student.update({

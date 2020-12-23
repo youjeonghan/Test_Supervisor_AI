@@ -2,6 +2,7 @@ import sys
 from pydub import AudioSegment
 from PIL import Image, ImageDraw
 from models import db, Students
+from datetime import datetime
 
 FILE_PATH = './sound/'
 SAVE_PATH = './image/waveform/'
@@ -57,13 +58,24 @@ class Waveform(object):
                      (column, upper_endpoint))
         return im
 
+    # def save(self, save_path):
+    #     """ Save the waveform as an image """
+    #     png_filename = save_path + self.filename.split('/')[-1]
+    #     png_filename = png_filename[:png_filename.rfind('.')] + '.png'
+    #     with open(png_filename, 'wb') as imfile:
+    #         self._generate_waveform_image().save(imfile, 'PNG')
+    #     return png_filename
+
     def save(self, save_path):
         """ Save the waveform as an image """
+        suffix = datetime.now().strftime("%y%m%d_%H%M%S")
+
         png_filename = save_path + self.filename.split('/')[-1]
-        png_filename = png_filename[:png_filename.rfind('.')] + '.png'
+        png_filename = png_filename[:png_filename.rfind('.')] + f"_{suffix}"+ '.png'
         with open(png_filename, 'wb') as imfile:
             self._generate_waveform_image().save(imfile, 'PNG')
         return png_filename
+
 
 # img = Waveform(FILE_PATH + FILE_NAME + '.wav')
 
@@ -71,10 +83,10 @@ class Waveform(object):
 
 def saveWaveform(file_path, save_path, student_number, student):
     img = Waveform(file_path + student_number + '.wav')
-    img.save(save_path)
+    png_name = img.save(save_path)
 
     student = Students.query.filter(Students.student_number == student.student_number)
     student = student.update({
-        'audio_img_path': f"{save_path}{student_number}.png"
+        'audio_img_path': png_name
         })
     db.session.commit()

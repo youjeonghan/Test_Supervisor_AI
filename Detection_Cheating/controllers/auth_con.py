@@ -87,9 +87,6 @@ def auth_sejong(id, pw):
     Returns:
         True or False
     '''
-    print(dosejong_api(id,pw))
-    print(sjlms_api(id,pw))
-    print(uis_api(id, pw))
     result = False
     name = str()
 

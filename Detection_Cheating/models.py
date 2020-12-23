@@ -20,10 +20,10 @@ class Students(db.Model):
     audio_result = db.Column(db.String(500))
     eye_result = db.Column(db.String(100))
     eye_ratio_center = db.Column(db.Integer)
-    eye_ratio_top = db.Column(db.Integer)
     eye_ratio_blink = db.Column(db.Integer)
     eye_ratio_left = db.Column(db.Integer)
     eye_ratio_right = db.Column(db.Integer)
+    time_range = db.Column(db.String(100))
     
 
     @property
@@ -35,6 +35,7 @@ class Students(db.Model):
             "video_path": self.video_path,
             "packet_path": self.packet_path,
             "audio_path": self.audio_path,
+            "audio_img_path": self.audio_img_path,
             "audio_messages": self.audio_messages,
             "audio_playtime": self.audio_playtime,
             "audio_img_path": self.audio_img_path,
@@ -42,6 +43,12 @@ class Students(db.Model):
             "reason": self.reason,
             "network_result": self.network_result,
             "audio_result": self.audio_result,
+            "eye_result": self.eye_result,
+            "eye_ratio_center": self.eye_ratio_center,
+            "eye_ratio_blink": self.eye_ratio_blink,
+            "eye_ratio_left": self.eye_ratio_left,
+            "eye_ratio_right": self.eye_ratio_right,
+            "time_range": self.time_range
         }
 
         

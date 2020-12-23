@@ -130,14 +130,3 @@ def call_stt(FILE_PATH, time_list):
     
     #print("final", text)
     return text
-
-        
-
-# TIME_SECTION = catchVoiceTimeZone2(FILE_PATH, FILE_NAME)
-# wav2flac(FILE_PATH+FILE_NAME, TIME_SECTION['time_zone'])
-# call_stt(FILE_PATH+FILE_NAME, TIME_SECTION['time_zone'])
-
-# time_section = catchVoiceTimeZone2("C:/GitHub/Detection_Cheating_Server/Detection_Cheating/static/sound/", "16011019.wav")
-# wav2flac("C:/GitHub/Detection_Cheating_Server/Detection_Cheating/static/sound/16011019.wav", time_section['time_zone'])
-# txt_list = call_stt(current_app.config["UPLOAD_SOUND_FOLDER"]+f"{student_number}.wav", time_section['time_zone'])
-# print(txt_list)
