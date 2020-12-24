@@ -5,7 +5,6 @@ Check the README.md for complete documentation.
 
 import cv2
 from gaze_tracking import GazeTracking
-import sys
 from models import db, Students
 import numpy as np
 import joblib
