@@ -25,8 +25,8 @@ def student_info(st_number):
     returndict['network_result'] = temp
 
     ###
-    temp = student.audio_messages.split('/')
-    returndict['audio_messages'] = temp
+    # temp = student.audio_messages.split('/')
+    # returndict['audio_messages'] = temp
 
     temp = student.audio_result.split(',')
     for t in temp:

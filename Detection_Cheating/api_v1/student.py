@@ -80,21 +80,22 @@ def submit_exam_data():
 
 
     # 지원이 코드 삽입 (wav, 목소리 출력 리스트)
-    time_section = catchVoiceTimeZone2(current_app.config["UPLOAD_SOUND_FOLDER"], f"{student_number}.wav")    
-    wav2flac(current_app.config["UPLOAD_SOUND_FOLDER"]+f"{student_number}.wav", time_section['time_zone'])
-    txt_list = call_stt(current_app.config["UPLOAD_SOUND_FOLDER"]+f"{student_number}.wav", time_section['time_zone'])
+    # GCP 서버 삭제로 인해 현재 돌아가지 않는 코드
+    # time_section = catchVoiceTimeZone2(current_app.config["UPLOAD_SOUND_FOLDER"], f"{student_number}.wav")    
+    # wav2flac(current_app.config["UPLOAD_SOUND_FOLDER"]+f"{student_number}.wav", time_section['time_zone'])
+    # txt_list = call_stt(current_app.config["UPLOAD_SOUND_FOLDER"]+f"{student_number}.wav", time_section['time_zone'])
     
     
-    list = str()
-    for i, txt in enumerate(txt_list):
-        if len(txt_list)-1 == i:
-            list = list + txt[0] 
-        else:
-            list = list + txt[0] + "/"
+    # list = str()
+    # for i, txt in enumerate(txt_list):
+    #     if len(txt_list)-1 == i:
+    #         list = list + txt[0] 
+    #     else:
+    #         list = list + txt[0] + "/"
     
-    student = Students.query.filter(Students.student_number == student.student_number)
-    student = student.update({'audio_messages': list})
-    db.session.commit()
+    # student = Students.query.filter(Students.student_number == student.student_number)
+    # student = student.update({'audio_messages': list})
+    # db.session.commit()
 
     return jsonify({
         "state":'success',

@@ -8,9 +8,11 @@ import config
 
 migrate = Migrate()
 
+# app=Flask(import_name=__name__,
+# template_folder="static/")
 app=Flask(import_name=__name__,
 static_url_path="/",
-static_folder="/",
+static_folder="static/",
 template_folder="static/"
 )
 app.config.from_object(config)
@@ -29,5 +31,5 @@ def manager():
     return render_template("manager.html")
 
 if __name__ == "__main__":
-    # app.run(host="127.0.0.1" , port=5000 , debug=True)
-    app.run(host="0.0.0.0" , port=5000 , debug=True)
+    app.run(host="127.0.0.1" , port=5000 , debug=True)
+    # app.run(host="0.0.0.0" , port=5000 , debug=True)

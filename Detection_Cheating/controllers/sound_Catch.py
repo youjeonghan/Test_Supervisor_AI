@@ -74,6 +74,8 @@ def catchVoiceTimeZone2(file_path, file_name):
   
 # wav to flac 변환 함수->
 def wav2flac(WAV_FILE, time_list):
+    print(WAV_FILE)
+    print(time_list)
     #wav파일 경로 중 파일명만 잘라서 .flac과 결합
     song = AudioSegment.from_wav(WAV_FILE)
     FLAC_FILE = []
@@ -91,6 +93,7 @@ def wav2flac(WAV_FILE, time_list):
         speech_section = speech_section.set_channels(1)
         
          #파일 변환 파라미터(파일명(확장자포함돼야함) , format = "확장자")
+        print(FLAC_FILE[i])
         speech_section.export(FLAC_FILE[i], format = "flac")
        
 #speech to text
